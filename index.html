@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Conversor de Roadcoins</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .logo {
+            width: 120px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #ef8123;
+            margin-bottom: 20px;
+        }
+
+        input, select {
+            padding: 12px;
+            font-size: 16px;
+            margin: 10px 0;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        button {
+            padding: 12px;
+            font-size: 16px;
+            background-color: #ef8123;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            width: 100%;
+            margin-top: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #cc6a1c;
+        }
+
+        #resultado {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <img src="logo.png" alt="Logo Roadtrip021" class="logo">
+        <h1>Conversor de Roadcoins</h1>
+
+        <label>Digite o valor:</label>
+        <input type="text" id="valor" placeholder="Ex: 5.000 ou 5.000,75">
+
+        <select id="tipoConversao">
+            <option value="roadcoinsParaReais">Roadcoins para Reais</option>
+            <option value="reaisParaRoadcoins">Reais para Roadcoins</option>
+        </select>
+
+        <button onclick="converter()">Converter</button>
+
+        <h2 id="resultado"></h2>
+
+        <footer>Desenvolvido por: Jhonata Caetano</footer>
+    </div>
+
+    <script>
+        function converter() {
+            let entrada = document.getElementById('valor').value
+                .replace(/\./g, '')  // remove pontos de milhar
+                .replace(',', '.');   // troca vírgula por ponto decimal
+
+            let valor = parseFloat(entrada);
+            let tipoConversao = document.getElementById('tipoConversao').value;
+            let resultado;
+
+            if (isNaN(valor)) {
+                document.getElementById('resultado').innerText = "Valor inválido. Digite um número.";
+                return;
+            }
+
+            if (tipoConversao === "roadcoinsParaReais") {
+                resultado = valor * 0.05;
+                document.getElementById('resultado').innerText =
+                    `Você tem R$ ${resultado.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            } else {
+                resultado = valor / 0.05;
+                document.getElementById('resultado').innerText =
+                    `Você tem ${resultado.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Roadcoins`;
+            }
+        }
+    </script>
+</body>
+</html>
