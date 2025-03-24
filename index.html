@@ -3,6 +3,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conversor de Roadcoins</title>
     <style>
         * {
@@ -18,16 +19,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            min-height: 100vh;
         }
 
         .container {
             background-color: white;
-            padding: 40px;
+            padding: 40px 20px;
             border-radius: 16px;
             box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
             text-align: center;
-            width: 90%;
+            width: 100%;
             max-width: 400px;
         }
 
@@ -73,10 +74,16 @@
             font-weight: bold;
         }
 
+        .erro {
+            color: red;
+            margin-top: 20px;
+        }
+
         footer {
-            margin-top: 30px;
-            font-size: 14px;
+            margin-top: 36px;
+            font-size: 10px;
             color: #777;
+            opacity: 0.6;
         }
     </style>
 </head>
@@ -86,7 +93,7 @@
         <img src="logo.png" alt="Logo Roadtrip021" class="logo">
         <h1>Conversor de Roadcoins</h1>
 
-        <label>Digite o valor:</label>
+        <label for="valor">Digite o valor:</label>
         <input type="text" id="valor" placeholder="Ex: 5.000 ou 5.000,75">
 
         <select id="tipoConversao">
@@ -103,28 +110,31 @@
 
     <script>
         function converter() {
-            let entrada = document.getElementById('valor').value
+            const inputEl = document.getElementById('valor');
+            const resultadoEl = document.getElementById('resultado');
+            let entrada = inputEl.value
                 .replace(/\./g, '')  // remove pontos de milhar
                 .replace(',', '.');   // troca vírgula por ponto decimal
 
             let valor = parseFloat(entrada);
             let tipoConversao = document.getElementById('tipoConversao').value;
-            let resultado;
 
             if (isNaN(valor)) {
-                document.getElementById('resultado').innerText = "Valor inválido. Digite um número.";
+                resultadoEl.textContent = "⚠️ Valor inválido. Digite um número.";
+                resultadoEl.className = "erro";
                 return;
             }
 
+            let resultado;
             if (tipoConversao === "roadcoinsParaReais") {
                 resultado = valor * 0.05;
-                document.getElementById('resultado').innerText =
-                    `Você tem R$ ${resultado.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+                resultadoEl.textContent = `Seus ${valor.toLocaleString('pt-BR')} Roadcoins valem R$ ${resultado.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
             } else {
                 resultado = valor / 0.05;
-                document.getElementById('resultado').innerText =
-                    `Você tem ${resultado.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Roadcoins`;
+                resultadoEl.textContent = `Com R$ ${valor.toLocaleString('pt-BR', { minimumFractionDigits: 2 })} você adquire ${resultado.toLocaleString('pt-BR', { minimumFractionDigits: 2 })} Roadcoins`;
             }
+
+            resultadoEl.className = "";
         }
     </script>
 </body>
