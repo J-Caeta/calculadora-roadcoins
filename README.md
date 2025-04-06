@@ -37,7 +37,7 @@ Abra o index.html no navegador
 
 ## 🔗 Acesse a aplicação
 
-👉🏿 [Clique aqui para usar a calculadora](https://jhonatacaetano.github.io/calculadora-roadcoins)
+👉🏿 [Clique aqui para usar a calculadora](https://jhonatacaetano.github.io/conversor-roadcoins)
 
 ---
 
