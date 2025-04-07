@@ -28,7 +28,7 @@ Conversor de pontos Roadcoins para Reais (e vice-versa), desenvolvido para facil
 
 
 # Clone o repositório
-git clone https://github.com/jhonatacaetano/calculadora-roadcoins.git
+git clone https://github.com/j-caeta/calculadora-roadcoins.git
 
 # Acesse a pasta
 cd calculadora-roadcoins
